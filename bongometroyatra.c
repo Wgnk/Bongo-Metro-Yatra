@@ -1,5 +1,5 @@
 /*A project using C language to perform operation of an app that allows user to signin, signup, close app, access app  the app. Sidewise it also allows user to check availability of metro with time as per user
-enters station with desire route and fare calculation based on criteria with ticket booking feature. It also calculates estimated travel time calculation, multiple ticket options (single journey, daily pass, monthly pass), and real-time crowd information any many more.*/
+enters station with desire route and fare calculation based on criteria with ticket booking feature. It also calculates estimated travel time calculation, multiple ticket options (single journey, daily pass, monthly pass), and real-time crowd information, card Recharge, Live train tracking.*/
 #include<stdio.h>
 #include<conio.h>
 #include<string.h>
@@ -317,7 +317,7 @@ void home()
     strftime(buffer, sizeof(buffer), "%a,%d %b %Y,%H:%M", tm_info);
     printf("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t%s\n\n", buffer);
     printf("_______________________________________________________________________________________________________________________________________________________________________\n\n");
-    printf("\t\t\t\t\tEnter '1' UP ticket\t\tEnter '2' DOWN ticket\t\tEnter '3' Close\n\n");
+    printf("Enter '1' UP ticket\t\tEnter '2' DOWN ticket\t\tEnter '3' Close\t\tEnter '4' for card recharge\t\tEnter '5' for Live train tracking\n\n");
     printf("_______________________________________________________________________________________________________________________________________________________________________\n\n");
      char message[] = "[NOTE:-As of now KMRCL only offers UP and DOWN tickets separately...]";
     int i, spaces;
@@ -349,9 +349,47 @@ void home()
     case 3:
         close2();
         break;
+    case 4:
+        rechargeCard();
+        break;
+    case 5:
+        {
+                char source[50], destination[50];
+                int travelTime;
+                printf("Enter Source Station: ");
+                scanf("%s", source);
+                printf("Enter Destination Station: ");
+                scanf("%s", destination);
+                printf("Enter Estimated Travel Time (mins): ");
+                scanf("%d", &travelTime);
+                trackTrain(source, destination, travelTime);
+                break;
+            }
     default:
         printf("Oops!! Something went wrong");
     }
+}
+int metroBalance = 0;
+void rechargeCard() {
+    int recharge;
+    printf("Your Current Balance: Rs. %d\n", metroBalance);
+    printf("Enter Balance To Recharge: ");
+    scanf("%d", &recharge);
+
+    if (recharge > 0) {
+        metroBalance += recharge;
+        printf("Recharge Successful! Your Balance: Rs. %d\n", metroBalance);
+    } else {
+        printf("Invalid Amount! Please enter a valid recharge amount.\n");
+    }
+}
+void trackTrain(char *source, char *destination, int travelTime) {
+    printf("\nTracking Train from %s to %s...\n", source, destination);
+    for (int i = 0; i <= travelTime; i += 2) {
+        printf("Train at %d%% of journey\n", (i * 100) / travelTime);
+        sleep(2);
+    }
+    printf("Train has arrived at %s!\n", destination);
 }
 void access1()
 {
