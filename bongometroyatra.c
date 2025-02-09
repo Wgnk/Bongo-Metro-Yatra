@@ -728,7 +728,10 @@ void close2()
     scanf("%d",&a);
     if(a==1)
     {
-        exit(0);
+        printf("Redirecting to new page\n");
+        Sleep(1000);
+        system("cls");
+        mains();
     }
     else
     {
