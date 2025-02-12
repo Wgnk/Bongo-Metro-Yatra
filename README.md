@@ -1,4 +1,4 @@
-                                                                                      # Bongo-Metro-Yatra 1.0
+# Bongo-Metro-Yatra 1.0
 Features of project as follows --->>>>
 1. User Authentication
 
